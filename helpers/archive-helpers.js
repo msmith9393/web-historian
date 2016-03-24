@@ -26,16 +26,34 @@ exports.initialize = function(pathsObj) {
 // modularize your code. Keep it clean!
 
 exports.readListOfUrls = function() {
+  // look through archives/sites.txt and read list of urls
+
+  // read file
+  // split on each new line
+  // becomes array
+
 };
 
-exports.isUrlInList = function() {
+exports.isUrlInList = function(target) {
+  // takes in an input url and checks if urls is in readListOf Urls
+
+  // use readListOfUrls to 
+
 };
 
 exports.addUrlToList = function() {
+  // takes in an input url and adds to the url list in archives/sites.txt 
 };
 
 exports.isUrlArchived = function() {
+  // check if url is in archives/sites folder
 };
 
 exports.downloadUrls = function() {
+  // save a file into the sites folder
+};
+
+exports.removeUrlFromList = function() {
+  // after url has been downloaded/saved to folder
+  // find url in list and remove it
 };
