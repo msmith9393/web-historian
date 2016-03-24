@@ -25,35 +25,72 @@ exports.initialize = function(pathsObj) {
 // The following function names are provided to you to suggest how you might
 // modularize your code. Keep it clean!
 
+
 exports.readListOfUrls = function() {
   // look through archives/sites.txt and read list of urls
 
   // read file
-  // split on each new line
-  // becomes array
-
+  // return fs.readFile(exports.paths.list, 'utf8', function(err, data) {
+  //   if (err) {
+  //     console.log('ERROR in readListOfUrls');
+  //   } else {
+  // // split on each new line
+  // // return array created
+  //     return data.split('\n');
+  //   }
+  // });
 };
 
 exports.isUrlInList = function(target) {
   // takes in an input url and checks if urls is in readListOf Urls
 
-  // use readListOfUrls to 
+  // loop through readListOfUrls
+  // check each item and compare it to target
+  // return true or false
 
 };
 
-exports.addUrlToList = function() {
+exports.addUrlToList = function(newUrl) {
   // takes in an input url and adds to the url list in archives/sites.txt 
+
+  // if isUrlInList is false
+    // fs.writeFile(string version of newUrl)
+
 };
 
 exports.isUrlArchived = function() {
   // check if url is in archives/sites folder
+  // return boolean value of: archive.paths.archivedSites + req.url
+
 };
 
 exports.downloadUrls = function() {
   // save a file into the sites folder
+
+  // 
+
 };
 
-exports.removeUrlFromList = function() {
+exports.removeUrlFromList = function(urlToRemove) {
   // after url has been downloaded/saved to folder
   // find url in list and remove it
+
+  // confirm that isUrlArchived is true
+  // confirm that isUrlInList is true
+  // read through list, which returns array
+    // splice target url out of array
+  // re-render sites.txt
+
 };
+
+
+
+
+
+
+
+
+
+
+
+
