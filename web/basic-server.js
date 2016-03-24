@@ -4,6 +4,7 @@ var initialize = require('./initialize.js');
 
 // Why do you think we have this here?
 // HINT: It has to do with what's in .gitignore
+// Initializes an archives folder
 initialize('./archives');
 
 var port = 8080;

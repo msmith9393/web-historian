@@ -1,0 +1,16 @@
+1. user enters url in client
+2. server checks if archived folder contains requested url folder
+3. if there does exist a folder for requested site, serve it to the client
+3.5 have client render page
+4. if requested url does not have a corresponding folder, add url to list in sites.txt
+4.5 send loading page to client, and have client render loading page
+5. worker sees list url in sites.txt and requests correct url from web
+6. worker saves response as a file within sites folder
+7. if successful, worker removes url from sites.txt
+8. client application has an interval that continually starts step 1
+9. after worker has successfully saved site, step 3 ('FOR CLARITY')
+
+
+TODO:
+  X-Server needs to host index.html
+  -need to serve file as variable

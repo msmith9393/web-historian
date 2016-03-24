@@ -1,6 +1,6 @@
 var path = require('path');
 var fs = require('fs');
-var archive = require('../helpers/archive-helpers');
+var archive = require('../helpers/archive-helpers'); // Helper functions
 
 exports.headers = headers = {
   'access-control-allow-origin': '*',
@@ -11,10 +11,13 @@ exports.headers = headers = {
 };
 
 exports.serveAssets = function(res, asset, callback) {
+  //asset is given by the server and represents some sort of web page to serve
+  
+};
   // Write some code here that helps serve up your static files!
   // (Static files are things like html (yours or archived from others...),
   // css, or anything that doesn't change often.)
-};
+  
 
 
 
