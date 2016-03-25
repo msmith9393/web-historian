@@ -10,6 +10,22 @@ exports.headers = headers = {
   'Content-Type': 'text/html'
 };
 
+
+// exports.sendResponse = function(res, obj, status) {
+//   status = status || 200;
+//   response.writeHead(status, headers);
+// };
+
+// exports.collectData = function(req, callback) {
+//   var data = '';
+//   req.on('data', function(chunk) {
+//     data += chunk;
+//   });
+//   req.on('end', function() {
+//     callback(data);
+//   });
+// };
+
 exports.serveAssets = function(res, asset, callback) {
   //asset is given by the server and represents some sort of web page to serve
   

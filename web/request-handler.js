@@ -1,13 +1,10 @@
 var path = require('path');
 var fs = require('fs');
 var archive = require('../helpers/archive-helpers');
-// require more modules/folders here!
 var httpHelpers = require('./http-helpers');
 var urlParser = require('url');
 
-var sitesListUrl = ''
 
-// console.log('LIST OF URLS', archive.readListOfUrls());
 
 exports.handleRequest = function (req, res) {
   var parts = urlParser.parse(req.url);
@@ -41,16 +38,31 @@ exports.handleRequest = function (req, res) {
     });
     req.on('end', function() {
       var url = dataStr.split('=')[1] + '\n';
-      var simplerAppend = function(url) {
-        fs.appendFile(archive.paths.list, url, 'utf8', function(err) {
-          if (err) {
-            console.log('ERROR');    
-          } else {
-            console.log(url, 'was ADDED to ', archive.paths.list);
-          }
-        }); 
-      };
-      archive.addUrlToList(url, simplerAppend);
+
+      archive.addUrlToList(url, function() {
+        fs.writeFile(archive.paths.list, url);
+      });
+
+      // is that url in the archived folder
+      // if it
+
+
+
+
+
+      // var simplerAppend = function(url) {
+      //   fs.appendFile(archive.paths.list, url, 'utf8', function(err) {
+      //     if (err) {
+      //       console.log('ERROR');    
+      //     } else {
+      //       console.log(url, 'was ADDED to ', archive.paths.list);
+      //     }
+      //   }); 
+      // };
+      // fs.writeFileSync(archive.paths.list, urlArray.join('\n'));
+
+      // var simpleWrite = fs.writeFile(archive.paths.list, url);
+
     });
   } else if (req.method === 'OPTIONS') {
     res.writeHead(200, httpHelpers.headers);
