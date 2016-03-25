@@ -10,7 +10,10 @@ console.log('URLS', urls);
 archive.downloadUrls(urls);
 
 
-
+// POST requests comes from index form
+// if the request is asking for a site we already have
+  // do something
+// else if the request is asking for 
 
 // exports.downloadUrls = function(urlArr) {
 //   for (var i = 0; i < urlArr.length; i++) {

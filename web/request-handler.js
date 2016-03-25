@@ -39,13 +39,14 @@ exports.handleRequest = function (req, res) {
     req.on('end', function() {
       var url = dataStr.split('=')[1] + '\n';
 
-      archive.addUrlToList(url, function() {
-        fs.writeFile(archive.paths.list, url);
+      archive.addUrlToList(url, function(url) {
+        fs.appendFile(archive.paths.list, url);
+        res.writeHead(302, httpHelpers.headers);
+        res.end(url);
       });
 
       // is that url in the archived folder
       // if it
-
 
 
 
