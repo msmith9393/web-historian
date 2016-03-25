@@ -1,6 +1,7 @@
 var fs = require('fs');
 var path = require('path');
 var _ = require('underscore');
+var http = require('http');
 
 /*
  * You will need to reuse the same paths many times over in the course of this sprint.
@@ -26,49 +27,64 @@ exports.initialize = function(pathsObj) {
 // modularize your code. Keep it clean!
 
 
-exports.readListOfUrls = function() {
+exports.readListOfUrls = function(callback) {
   // look through archives/sites.txt and read list of urls
-
-  // read file
-  // return fs.readFile(exports.paths.list, 'utf8', function(err, data) {
-  //   if (err) {
-  //     console.log('ERROR in readListOfUrls');
-  //   } else {
-  // // split on each new line
-  // // return array created
-  //     return data.split('\n');
-  //   }
-  // });
+  fs.readFile(exports.paths.list, 'utf8', function(err, data) {
+    var urlArr = data.split('\n');
+    if (err) {
+      console.log('ERROR in readListOfUrls');
+    } else {
+      callback(urlArr);
+    }
+  });
 };
 
-exports.isUrlInList = function(target) {
-  // takes in an input url and checks if urls is in readListOf Urls
-
-  // loop through readListOfUrls
-  // check each item and compare it to target
-  // return true or false
-
+exports.isUrlInList = function(target, callback) {
+  exports.readListOfUrls(function(arr) {
+    var exists = false;
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i] === target) {
+        exists = true;
+      }
+    }
+    callback(exists);
+  });
 };
 
-exports.addUrlToList = function(newUrl) {
-  // takes in an input url and adds to the url list in archives/sites.txt 
-
-  // if isUrlInList is false
-    // fs.writeFile(string version of newUrl)
-
+exports.addUrlToList = function(newUrl, callback) {
+  exports.isUrlInList(newUrl, function(isInList) {
+    if (!isInList) {
+      callback(newUrl);
+    }
+  });
 };
 
-exports.isUrlArchived = function() {
-  // check if url is in archives/sites folder
-  // return boolean value of: archive.paths.archivedSites + req.url
-
+exports.isUrlArchived = function(url, callback) {
+  var exists = false;
+  if (exports.paths.archivedSites + url) {
+    exists = true;
+  }
+  callback(exists);
 };
 
-exports.downloadUrls = function() {
+exports.downloadUrls = function(urlArr) {
   // save a file into the sites folder
 
-  // 
-
+  //use each function on the urlArr
+  _.each(urlArr, function(url) {
+    if (!url) {
+      return;
+    }
+    // if the url is not invalid
+      // save a file with the url's name in path.archivedSites
+      // have the contents of that file be the correct html content
+        // request data? pipe?
+    var dataStr = '';
+    request.on('data', function(chunk) {
+      dataStr += chunk;
+    });
+    request(paths.archivedSites + dataStr).pipe(url);
+  });
 };
 
 exports.removeUrlFromList = function(urlToRemove) {

@@ -5,6 +5,8 @@ var archive = require('../helpers/archive-helpers');
 var httpHelpers = require('./http-helpers');
 var urlParser = require('url');
 
+var sitesListUrl = ''
+
 // console.log('LIST OF URLS', archive.readListOfUrls());
 
 exports.handleRequest = function (req, res) {
@@ -33,20 +35,23 @@ exports.handleRequest = function (req, res) {
       });
     }
   } else if (req.method === 'POST') {
-    // console.log('ARCHIVE LIST', archive.paths.list);
-    // console.log('requrl', req.url);
-    console.log('req body', req.body);
-    // console.log('parts', parts);
-    //append submitted sites to sites.txt
-
-    //CHUNK THE DATA THEN HANDLE
-
-    fs.writeFile(archive.paths.list, req.url, 'utf8', function(err) {
-      if (err) {
-        console.log('ERROR');    
-      }
+    var dataStr = '';
+    req.on('data', function(chunk) {
+      dataStr += chunk;
     });
-
+    req.on('end', function() {
+      var url = dataStr.split('=')[1] + '\n';
+      var simplerAppend = function(url) {
+        fs.appendFile(archive.paths.list, url, 'utf8', function(err) {
+          if (err) {
+            console.log('ERROR');    
+          } else {
+            console.log(url, 'was ADDED to ', archive.paths.list);
+          }
+        }); 
+      };
+      archive.addUrlToList(url, simplerAppend);
+    });
   } else if (req.method === 'OPTIONS') {
     res.writeHead(200, httpHelpers.headers);
     res.end();
